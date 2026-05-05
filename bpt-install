@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+# -----------------------------------------
+# BPT Installer
+# -----------------------------------------
+# Installs the Bash Productivity Toolkit by:
+# - Creating ~/.bpt directory
+# - Copying aliases and functions
+# - Backing up .bashrc
+# - Adding BPT sourcing lines
+# -----------------------------------------
+
+BPT_DIR="$HOME/.bpt"
+
+echo "Installing Bash Productivity Toolkit..."
+
+# --- Create directory ---
+mkdir -p "$BPT_DIR/aliases"
+mkdir -p "$BPT_DIR/functions"
+
+# --- Copy modules ---
+cp -r aliases/* "$BPT_DIR/aliases/"
+cp -r functions/* "$BPT_DIR/functions/"
+
+# --- Backup .bashrc ---
+if [ ! -f "$HOME/.bashrc.bpt-backup" ]; then
+    cp "$HOME/.bashrc" "$HOME/.bashrc.bpt-backup"
+    echo "Backup created: ~/.bashrc.bpt-backup"
+fi
+
+# --- Add sourcing lines if not already present ---
+if ! grep -q "### BPT START ###" "$HOME/.bashrc"; then
+    cat << 'EOF' >> "$HOME/.bashrc"
+
+### BPT START ###
+# Load BPT aliases
+for file in $HOME/.bpt/aliases/*.aliases; do
+    [ -r "$file" ] && source "$file"
+done
+
+# Load BPT functions
+for file in $HOME/.bpt/functions/*.sh; do
+    [ -r "$file" ] && source "$file"
+done
+### BPT END ###
+EOF
+    echo "BPT sourcing lines added to ~/.bashrc"
+fi
+
+echo "Installation complete."
+echo "Reloading shell..."
+source "$HOME/.bashrc"
+
+echo "BPT is now installed and ready to use."
