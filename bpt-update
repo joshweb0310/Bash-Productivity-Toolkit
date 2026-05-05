@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+# -----------------------------------------
+# BPT Updater
+# -----------------------------------------
+# Updates the Bash Productivity Toolkit by:
+# - Pulling latest changes
+# - Reinstalling modules
+# - Reloading shell
+# -----------------------------------------
+
+BPT_DIR="$HOME/.bpt"
+
+echo "Updating Bash Productivity Toolkit..."
+
+# --- Pull latest repo changes ---
+if [ -d ".git" ]; then
+    git pull --quiet
+    echo "Repository updated."
+else
+    echo "Warning: Not a git repository. Skipping git pull."
+fi
+
+# --- Reinstall modules ---
+mkdir -p "$BPT_DIR/aliases"
+mkdir -p "$BPT_DIR/functions"
+
+cp -r aliases/* "$BPT_DIR/aliases/"
+cp -r functions/* "$BPT_DIR/functions/"
+
+echo "Modules updated."
+
+# --- Reload shell ---
+echo "Reloading shell..."
+source "$HOME/.bashrc"
+
+echo "BPT update complete."
