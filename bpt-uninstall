@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# -----------------------------------------
+# BPT Uninstaller
+# -----------------------------------------
+# Removes the Bash Productivity Toolkit by:
+# - Deleting ~/.bpt directory
+# - Restoring .bashrc backup
+# - Cleaning sourcing lines
+# -----------------------------------------
+
+BPT_DIR="$HOME/.bpt"
+BACKUP="$HOME/.bashrc.bpt-backup"
+
+echo "Uninstalling Bash Productivity Toolkit..."
+
+# --- Remove BPT directory ---
+rm -rf "$BPT_DIR"
+echo "Removed: $BPT_DIR"
+
+# --- Restore .bashrc backup if it exists ---
+if [ -f "$BACKUP" ]; then
+    cp "$BACKUP" "$HOME/.bashrc"
+    echo "Restored original .bashrc from backup."
+else
+    # Remove BPT sourcing lines manually
+    sed -i '/### BPT START ###/,/### BPT END ###/d' "$HOME/.bashrc"
+    echo "Removed BPT sourcing lines from .bashrc."
+fi
+
+echo "BPT uninstalled."
+echo "Reloading shell..."
+source "$HOME/.bashrc"
+
+echo "Uninstall complete."
