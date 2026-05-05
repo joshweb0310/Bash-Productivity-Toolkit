@@ -1,0 +1,25 @@
+# --- System monitoring ---
+alias mem='free -h'
+alias cpu='lscpu'
+alias topu='top -u $USER'
+alias dfh='df -h'
+alias duh='du -sh *'
+
+# --- Package management (Debian/Ubuntu) ---
+alias update='sudo apt update'
+alias upgrade='sudo apt upgrade -y'
+alias install='sudo apt install -y'
+alias remove='sudo apt remove -y'
+alias autoremove='sudo apt autoremove -y'
+
+# --- Services ---
+alias svc='systemctl'
+alias svcs='systemctl status'
+alias svcr='sudo systemctl restart'
+alias svcl='sudo systemctl reload'
+alias svce='sudo systemctl enable'
+alias svcd='sudo systemctl disable'
+
+# --- Logs ---
+alias jctl='journalctl -xe'
+alias jctlf='journalctl -f'
