@@ -1,0 +1,10 @@
+# --- Nginx shortcuts ---
+alias nginx-test='sudo nginx -t'
+alias nginx-reload='sudo systemctl reload nginx'
+alias nginx-restart='sudo systemctl restart nginx'
+alias nginx-status='systemctl status nginx'
+
+# --- Nginx directories ---
+alias nginx-conf='cd /etc/nginx'
+alias nginx-sites='cd /etc/nginx/sites-available'
+alias nginx-enabled='cd /etc/nginx/sites-enabled'
