@@ -1,0 +1,24 @@
+# --- Navigation ---
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# --- File operations ---
+alias cpv='cp -v'
+alias mvv='mv -v'
+alias rmf='rm -rf'
+
+# --- Search / grep ---
+alias grep='grep --color=auto'
+alias fsearch='find . -type f -iname'
+
+# --- Permissions ---
+alias chx='chmod +x'
+alias ownme='sudo chown $USER:$USER'
+
+# --- System info ---
+alias path='echo -e ${PATH//:/\\n}'
+alias ports='sudo netstat -tulpn'
